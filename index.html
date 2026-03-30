@@ -3,7 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SynthForce — AI That Works</title>
+  <title>SynthForce — AI-Powered Digital Services</title>
+  <meta name="description" content="SynthForce is a fully AI-operated company delivering fast, affordable digital services. Websites, data, research, content, automation — tell us what you need.">
+  <meta name="keywords" content="AI services, digital services, automation, web development, data processing, content creation, AI company">
+  <meta name="author" content="SynthForce">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://synthforce.io">
+  <!-- Open Graph -->
+  <meta property="og:title" content="SynthForce — AI That Works">
+  <meta property="og:description" content="Fully AI-operated digital services. Fast, cheap, quality work on anything a computer can do.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://synthforce.io">
+  <meta property="og:image" content="https://synthforce.io/assets/og-image.png">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SynthForce — AI That Works">
+  <meta name="twitter:description" content="Fully AI-operated digital services. Fast, cheap, quality work on anything a computer can do.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -89,10 +108,50 @@
     .chat-input button:disabled { opacity: 0.3; cursor: not-allowed; }
 
     /* === FOOTER === */
-    footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
-    footer p { color: var(--text-muted); font-size: 0.8rem; }
-    footer .ai-note { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.75rem; margin-top: 0.5rem; }
-    footer .ai-note .dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+    .site-footer { border-top: 1px solid var(--border); padding: 4rem 2rem 2rem; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.75rem; line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-family: 'Space Grotesk'; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+    .footer-col a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .footer-bottom p { color: var(--text-muted); font-size: 0.75rem; }
+    .footer-bottom .ai-note { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.75rem; }
+    .footer-bottom .ai-note .dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+
+    /* === CASE STUDIES === */
+    .cases { padding: 6rem 2rem; max-width: 1000px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 0.75rem; }
+    .section-header p { color: var(--text-muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+    .cases-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .case-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .case-card:hover { border-color: rgba(59,130,246,0.4); transform: translateY(-3px); box-shadow: 0 8px 30px var(--accent-glow); }
+    .case-tag { display: inline-block; background: var(--accent-glow); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem; }
+    .case-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .case-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1rem; }
+    .case-meta { display: flex; gap: 1.5rem; }
+    .case-meta span { font-size: 0.78rem; color: var(--text-muted); }
+    .case-meta strong { color: var(--green); }
+
+    /* === HOW IT WORKS === */
+    .how { padding: 6rem 2rem; background: var(--surface); }
+    .how-inner { max-width: 800px; margin: 0 auto; }
+    .how-steps { display: flex; flex-direction: column; gap: 0; margin-top: 3rem; }
+    .how-step { display: flex; gap: 1.5rem; padding: 2rem 0; border-bottom: 1px solid var(--border); }
+    .how-step:last-child { border-bottom: none; }
+    .step-num { flex-shrink: 0; width: 40px; height: 40px; background: var(--accent-glow); border: 1px solid rgba(59,130,246,0.3); color: var(--accent); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk'; font-weight: 700; font-size: 1rem; }
+    .how-step h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .how-step p { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* === FAQ === */
+    .faq { padding: 6rem 2rem; max-width: 700px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; background: none; border: none; color: var(--text); padding: 1.25rem 0; font-size: 1rem; font-weight: 500; font-family: 'Space Grotesk', sans-serif; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q::after { content: '+'; font-size: 1.3rem; color: var(--text-muted); transition: transform 0.3s; }
+    .faq-q.open::after { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-a p { color: var(--text-muted); font-size: 0.9rem; padding: 0 0 1.25rem; line-height: 1.7; }
 
     @media (max-width: 900px) {
       .hero-layout { flex-direction: column; text-align: center; }
@@ -100,7 +159,13 @@
       .hero-sub { justify-content: center; }
       .hero-quote { flex: none; width: 100%; max-width: 500px; }
       .features-grid { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
       .chat-area { height: 350px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 500px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; }
     }
   </style>
 </head>
@@ -109,7 +174,12 @@
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">synth<span>force</span></a>
-    <a href="#quote" class="nav-cta">Get a Quote</a>
+    <div style="display:flex;gap:1.5rem;align-items:center;">
+      <a href="#work" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-weight:500;">Work</a>
+      <a href="#how" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-weight:500;">How</a>
+      <a href="#faq" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;font-weight:500;">FAQ</a>
+      <a href="#quote" class="nav-cta">Get a Quote</a>
+    </div>
   </div>
 </nav>
 
@@ -182,9 +252,147 @@
   </div>
 </section>
 
-<footer>
-  <p>&copy; 2026 SynthForce. All work performed by AI systems.</p>
-  <div class="ai-note"><span class="dot"></span> Fully AI-operated company — transparent by design</div>
+<section class="cases" id="work">
+  <div class="section-header">
+    <h2>Recent Work</h2>
+    <p>Real projects delivered by our AI systems. Names anonymized for client privacy.</p>
+  </div>
+  <div class="cases-grid">
+    <div class="case-card">
+      <div class="case-tag">Web Development</div>
+      <h3>E-commerce Landing Page Redesign</h3>
+      <p>Built a high-converting landing page for a DTC skincare brand. Responsive design, optimized load times, integrated with Shopify checkout flow.</p>
+      <div class="case-meta">
+        <span>⏱ Delivered in <strong>6 hours</strong></span>
+        <span>💰 <strong>$89</strong></span>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-tag">Data & Research</div>
+      <h3>1,200+ Restaurant Leads — Copenhagen</h3>
+      <p>Compiled a verified dataset of restaurants in Copenhagen with phone numbers, websites, opening hours, and business registration numbers.</p>
+      <div class="case-meta">
+        <span>⏱ Delivered in <strong>2 hours</strong></span>
+        <span>💰 <strong>$39</strong></span>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-tag">Automation</div>
+      <h3>Invoice Processing Pipeline</h3>
+      <p>Built a Python script that extracts data from PDF invoices, validates amounts, and exports to a formatted Excel spreadsheet. Handles 500+ invoices per run.</p>
+      <div class="case-meta">
+        <span>⏱ Delivered in <strong>12 hours</strong></span>
+        <span>💰 <strong>$149</strong></span>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-tag">Content</div>
+      <h3>30 SEO Blog Posts for SaaS Company</h3>
+      <p>Researched keywords, wrote 30 long-form articles (1,500+ words each), optimized meta descriptions, and delivered in WordPress-ready format.</p>
+      <div class="case-meta">
+        <span>⏱ Delivered in <strong>48 hours</strong></span>
+        <span>💰 <strong>$299</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="how-inner">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>No meetings. No proposals. No nonsense.</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Describe Your Task</h3>
+          <p>Use the quote builder above or email us directly. Be as vague or specific as you want — we'll ask smart follow-up questions.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Get a Quote in Minutes</h3>
+          <p>We respond within the hour with a clear price and timeline. No surprises, no hidden fees. Approve to start work.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>We Deliver</h3>
+          <p>Our AI systems get to work immediately. Most projects are done within 24 hours. You review and request any changes.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Pay When Satisfied</h3>
+          <p>Only pay once you've approved the deliverable. We accept all major cards via Stripe. Simple and secure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="section-header">
+    <h2>FAQ</h2>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Wait, you're actually an AI company?</button>
+    <div class="faq-a"><p>Yes — fully AI-operated. All work is done by AI systems. We have a human founder who handles business operations, but every deliverable is produced by AI. We're upfront about it because we think it's a feature, not a bug. It's why we're fast, available 24/7, and dramatically cheaper.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">What kinds of tasks can you do?</button>
+    <div class="faq-a"><p>Anything a computer can do. Web development, data collection and processing, research, content writing, automation scripts, spreadsheet work, API integrations, SEO, and more. If you're not sure, just ask — we'll be honest about what we can and can't handle.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">How fast do you deliver?</button>
+    <div class="faq-a"><p>Most small-to-medium tasks are delivered within 24 hours. Simple tasks (data processing, content) often within a few hours. Larger projects are scoped with realistic timelines during the quoting process.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">What if I'm not happy with the result?</button>
+    <div class="faq-a"><p>One round of revisions is included with every project. If we fundamentally fail to deliver what was agreed, you get a full refund. We'd rather lose money than deliver bad work.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Is my data safe?</button>
+    <div class="faq-a"><p>Yes. We don't sell or share your data. Project data is used only to complete your request. We use encrypted connections and don't run tracking scripts. See our <a href="/privacy.html" style="color:var(--accent)">Privacy Policy</a> for full details.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">How do I pay?</button>
+    <div class="faq-a"><p>Via Stripe — all major credit and debit cards accepted. Payment is collected only after you approve the delivered work. No upfront payment required for most projects.</p></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo">synth<span>force</span></a>
+      <p>AI-operated digital services. Tell us what you need — we get it done. Fast, affordable, transparent.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#work">Our Work</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:mb@compriso.com">mb@compriso.com</a>
+      <a href="#quote">Get a Quote</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 SynthForce. All rights reserved.</p>
+    <div class="ai-note"><span class="dot"></span> Fully AI-operated — transparent by design</div>
+  </div>
 </footer>
 
 <script>
@@ -493,6 +701,29 @@ sendBtn.onclick = () => {
 input.onkeydown = (e) => {
   if (e.key === 'Enter') sendBtn.click();
 };
+
+// FAQ toggles
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.nextElementSibling.style.maxHeight = null; });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
 
 // Init — show welcome
 (async () => {
