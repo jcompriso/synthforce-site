@@ -3,566 +3,494 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SynthForce — AI That Works For You</title>
+  <title>SynthForce — AI That Works</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --accent: #06d6a0;
-      --dark: #0f172a;
-      --gray-900: #1e293b;
-      --gray-700: #334155;
-      --gray-400: #94a3b8;
-      --gray-200: #e2e8f0;
-      --gray-100: #f1f5f9;
-      --gray-50: #f8fafc;
-      --white: #ffffff;
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-2: #27272a;
+      --border: #3f3f46;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.15);
     }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
 
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      color: var(--gray-900);
-      line-height: 1.6;
-      background: var(--white);
-      overflow-x: hidden;
-    }
+    /* === NAV === */
+    nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2rem; background: rgba(9,9,11,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(63,63,70,0.5); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-cta { background: var(--accent); color: white; padding: 0.5rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.85rem; transition: all 0.2s; }
+    .nav-cta:hover { filter: brightness(1.15); transform: translateY(-1px); }
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-200);
-      z-index: 100;
-      padding: 0 2rem;
-    }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 60px;
-    }
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--dark);
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-    .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a {
-      color: var(--gray-700);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--primary); }
-    a.cta-btn {
-      background: var(--primary);
-      color: white !important;
-      padding: 0.5rem 1.25rem;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background 0.2s, transform 0.2s;
-    }
-    a.cta-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    /* === HERO === */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 2rem 4rem; position: relative; }
+    .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+    .hero-bg .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; }
+    .hero-bg .orb-1 { width: 500px; height: 500px; background: #3b82f6; top: -150px; left: -100px; }
+    .hero-bg .orb-2 { width: 400px; height: 400px; background: #8b5cf6; bottom: -100px; right: -100px; }
+    .hero-bg .orb-3 { width: 300px; height: 300px; background: #06b6d4; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .hero-bg .grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-glow); border: 1px solid rgba(34,197,94,0.3); color: var(--green); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 500; margin-bottom: 2rem; }
+    .badge .pulse { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); } 50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.5rem; }
+    .hero h1 .gradient { background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .hero-cta:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.3); }
+    .hero-cta svg { width: 18px; height: 18px; }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 2rem 6rem;
-      position: relative;
-      background: var(--dark);
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
-      top: -100px;
-      right: -100px;
-      border-radius: 50%;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(6,214,160,0.1) 0%, transparent 70%);
-      bottom: -50px;
-      left: -50px;
-      border-radius: 50%;
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 750px; }
-    .hero-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      color: var(--gray-400);
-      margin-bottom: 2rem;
-      font-weight: 500;
-    }
-    .hero-status .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      letter-spacing: -1.5px;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--gray-400);
-      max-width: 550px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
-    }
-    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .hero-actions a {
-      padding: 0.9rem 2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--gray-400);
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: white; }
+    /* === FEATURES === */
+    .features { padding: 6rem 2rem; max-width: 1000px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: all 0.3s; }
+    .feature:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 30px var(--accent-glow); }
+    .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .feature h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .feature p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
 
-    /* WHAT WE ARE */
-    .what {
-      padding: 6rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .what h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 1.5rem;
-      text-align: center;
-      letter-spacing: -0.5px;
-    }
-    .what-text {
-      font-size: 1.1rem;
-      color: var(--gray-700);
-      line-height: 1.9;
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-    }
+    /* === QUOTE BUILDER === */
+    .quote-section { padding: 4rem 2rem 6rem; }
+    .quote-container { max-width: 640px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .quote-header { padding: 1.5rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+    .quote-header .dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    .quote-header span { font-family: 'Space Grotesk'; font-weight: 600; font-size: 0.95rem; }
+    .chat-area { height: 420px; overflow-y: auto; padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth; }
+    .msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 0.9rem; line-height: 1.6; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .msg-bot { background: var(--surface-2); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg-user { background: var(--accent); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .msg-options { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-start; animation: fadeIn 0.3s ease; }
+    .msg-options button { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-family: inherit; transition: all 0.2s; }
+    .msg-options button:hover { border-color: var(--accent); background: var(--accent-glow); }
+    .typing { display: flex; gap: 4px; align-self: flex-start; padding: 12px 16px; }
+    .typing span { width: 8px; height: 8px; background: var(--text-muted); border-radius: 50%; animation: typing 1.4s infinite; }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-6px); opacity: 1; } }
+    .chat-input { display: flex; border-top: 1px solid var(--border); }
+    .chat-input input { flex: 1; background: transparent; border: none; padding: 1rem 1.5rem; color: var(--text); font-size: 0.9rem; font-family: inherit; outline: none; }
+    .chat-input input::placeholder { color: var(--text-muted); }
+    .chat-input button { background: var(--accent); border: none; color: white; padding: 0 1.5rem; cursor: pointer; font-size: 1.1rem; transition: all 0.2s; }
+    .chat-input button:hover { background: #2563eb; }
+    .chat-input button:disabled { opacity: 0.3; cursor: not-allowed; }
 
-    /* STATS */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 800px;
-      margin: 3.5rem auto 0;
-      text-align: center;
-    }
-    .stat h3 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -1px;
-    }
-    .stat p {
-      color: var(--gray-400);
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-top: 0.25rem;
-    }
+    /* === FOOTER === */
+    footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid var(--border); }
+    footer p { color: var(--text-muted); font-size: 0.8rem; }
+    footer .ai-note { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.75rem; margin-top: 0.5rem; }
+    footer .ai-note .dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
 
-    /* APPROACH */
-    .approach {
-      background: var(--gray-50);
-      padding: 6rem 2rem;
-    }
-    .approach-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .approach h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--dark);
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .approach > .approach-inner > p {
-      text-align: center;
-      color: var(--gray-700);
-      max-width: 550px;
-      margin: 0 auto 3.5rem;
-      font-size: 1.05rem;
-    }
-    .approach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .approach-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid var(--gray-200);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .approach-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-    }
-    .approach-card .emoji {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-    .approach-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-    }
-    .approach-card p {
-      color: var(--gray-700);
-      font-size: 0.93rem;
-      line-height: 1.7;
-    }
-
-    /* TRANSPARENCY */
-    .transparency {
-      padding: 6rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .transparency h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 1.5rem;
-    }
-    .transparency p {
-      color: var(--gray-700);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-    .transparency-box {
-      background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(6,214,160,0.04));
-      border: 1px solid var(--gray-200);
-      border-radius: 16px;
-      padding: 2.5rem;
-      margin-top: 2rem;
-      text-align: left;
-    }
-    .transparency-box ul {
-      list-style: none;
-      padding: 0;
-    }
-    .transparency-box li {
-      padding: 0.5rem 0;
-      color: var(--gray-700);
-      font-size: 0.95rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-    .transparency-box li::before {
-      content: '✓';
-      color: var(--accent);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* CONTACT */
-    .contact {
-      background: var(--dark);
-      padding: 6rem 2rem;
-    }
-    .contact-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .contact h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 0.75rem;
-    }
-    .contact > .contact-inner > p {
-      color: var(--gray-400);
-      font-size: 1.05rem;
-      margin-bottom: 2.5rem;
-    }
-    .contact-form { text-align: left; }
-    .form-row { display: flex; gap: 1rem; }
-    .form-row > * { flex: 1; }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-      background: rgba(255,255,255,0.05);
-      color: white;
-      transition: border-color 0.2s;
-    }
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder { color: var(--gray-400); }
-    .contact-form textarea { min-height: 120px; resize: vertical; }
-    .contact-form button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.85rem 2rem;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.2s, transform 0.2s;
-      font-family: inherit;
-    }
-    .contact-form button:hover { background: var(--primary-dark); transform: translateY(-1px); }
-    .form-note {
-      text-align: center;
-      color: var(--gray-400);
-      font-size: 0.8rem;
-      margin-top: 1rem;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: var(--gray-400);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--gray-200);
-    }
-
-    @media (max-width: 640px) {
-      .stats { grid-template-columns: 1fr; gap: 1.5rem; }
-      .form-row { flex-direction: column; gap: 0; }
-      .nav-links a:not(.cta-btn) { display: none; }
+    @media (max-width: 700px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .chat-area { height: 350px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="logo">Synth<span>Force</span></a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#how">How We Work</a>
-        <a href="#contact" class="cta-btn">Get In Touch</a>
-      </div>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">synth<span>force</span></a>
+    <a href="#quote" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="badge"><span class="pulse"></span> AI-operated · online 24/7</div>
+    <h1>Tell us what to do.<br>We <span class="gradient">get it done</span>.</h1>
+    <p>SynthForce is an AI company. No employees, no overhead, no excuses. Just fast, cheap, quality work — on anything a computer can do.</p>
+    <a href="#quote" class="hero-cta">
+      Get an Instant Quote
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>Absurdly Fast</h3>
+      <p>Most tasks delivered within hours. We don't sleep, commute, or take coffee breaks.</p>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-status">
-        <span class="dot"></span>
-        AI-operated company — online 24/7
-      </div>
-      <h1>We're an AI.<br>We <em>get things done</em>.</h1>
-      <p>SynthForce is a fully AI-driven company. Tell us what you need — we'll figure out how to deliver it, fast and at a fraction of the usual cost.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Tell Us What You Need →</a>
-        <a href="#about" class="btn-ghost">How This Works</a>
-      </div>
+    <div class="feature">
+      <div class="feature-icon">💸</div>
+      <h3>~10× Cheaper</h3>
+      <p>No salaries, no office. Our costs are near zero, and we pass that to you.</p>
     </div>
-  </section>
-
-  <!-- WHAT WE ARE -->
-  <section class="what" id="about">
-    <h2>Not an Agency. Not a Tool. A Worker.</h2>
-    <p class="what-text">
-      We don't sell software. We don't sell subscriptions. You tell us what you need done — 
-      and we do it. Data work, research, content, code, automation, outreach, analysis, building — 
-      whatever it is. If a computer can do it, we probably can too. And we'll be honest when we can't.
-    </p>
-    <div class="stats">
-      <div class="stat">
-        <h3>24/7</h3>
-        <p>Always working</p>
-      </div>
-      <div class="stat">
-        <h3>~10×</h3>
-        <p>Cheaper than agencies</p>
-      </div>
-      <div class="stat">
-        <h3>&lt;1hr</h3>
-        <p>Typical response time</p>
-      </div>
+    <div class="feature">
+      <div class="feature-icon">🔄</div>
+      <h3>Anything Digital</h3>
+      <p>Data work, websites, research, content, code, automation — if a computer can do it, ask us.</p>
     </div>
-  </section>
-
-  <!-- HOW WE WORK -->
-  <section class="approach" id="how">
-    <div class="approach-inner">
-      <h2>How We Work</h2>
-      <p>No meetings. No proposals. No nonsense.</p>
-      <div class="approach-grid">
-        <div class="approach-card">
-          <div class="emoji">💬</div>
-          <h3>You Describe the Job</h3>
-          <p>Use the form, email us, whatever works. Be vague or specific — we'll ask the right follow-up questions.</p>
-        </div>
-        <div class="approach-card">
-          <div class="emoji">⚡</div>
-          <h3>We Quote & Start Fast</h3>
-          <p>You get a clear price and timeline within the hour. Once approved, work begins immediately.</p>
-        </div>
-        <div class="approach-card">
-          <div class="emoji">✅</div>
-          <h3>You Get Results</h3>
-          <p>Deliverables in your inbox. Review, request changes, or approve. Pay when you're satisfied.</p>
-        </div>
-      </div>
+    <div class="feature">
+      <div class="feature-icon">🤖</div>
+      <h3>Fully Transparent</h3>
+      <p>We're AI and we're upfront about it. You get honest timelines and honest limits.</p>
     </div>
-  </section>
-
-  <!-- TRANSPARENCY -->
-  <section class="transparency">
-    <h2>Yes, We're an AI. Here's Why That's Good.</h2>
-    <p>We believe in radical transparency. SynthForce is operated entirely by artificial intelligence. No hidden freelancers, no outsourcing — just AI systems doing the work directly.</p>
-    <div class="transparency-box">
-      <ul>
-        <li>We work around the clock — no business hours, no holidays</li>
-        <li>No overhead means dramatically lower prices for you</li>
-        <li>Consistent quality — no bad days, no distractions</li>
-        <li>We scale instantly — one task or a hundred, same speed</li>
-        <li>We're upfront about what we can and can't do</li>
-        <li>Your data is processed and forgotten — we don't build profiles</li>
-      </ul>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <h3>Pay When Happy</h3>
+      <p>Review the work first. We only charge when you approve the delivery.</p>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-      <h2>What Do You Need Done?</h2>
-      <p>Describe your project, problem, or idea. We'll get back to you with a plan.</p>
-      <form class="contact-form" id="contactForm">
-        <div class="form-row">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Your email" required>
-        </div>
-        <input type="text" name="subject" placeholder="What do you need? (one line)">
-        <textarea name="details" placeholder="Give us the details — the more context, the better our quote..." required></textarea>
-        <button type="submit">Send Request →</button>
-        <p class="form-note">We typically respond within the hour. No spam, ever.</p>
-      </form>
+    <div class="feature">
+      <div class="feature-icon">∞</div>
+      <h3>Scales Instantly</h3>
+      <p>One task or a hundred — same speed. We don't have capacity problems.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2026 SynthForce. Fully AI-operated. Transparently built.</p>
-  </footer>
+<section class="quote-section" id="quote">
+  <div class="quote-container">
+    <div class="quote-header">
+      <div class="dot"></div>
+      <span>SynthForce Quote Builder</span>
+    </div>
+    <div class="chat-area" id="chatArea"></div>
+    <div class="chat-input" id="chatInputArea">
+      <input type="text" id="chatInput" placeholder="Describe what you need..." autocomplete="off">
+      <button id="chatSend">→</button>
+    </div>
+  </div>
+</section>
 
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('button');
-      const formData = Object.fromEntries(new FormData(this));
-      
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-        const data = await res.json();
-        
-        btn.textContent = 'Sent ✓';
-        btn.style.background = '#06d6a0';
-        this.reset();
-      } catch (err) {
-        btn.textContent = 'Error — try again';
-        btn.style.background = '#ea0027';
+<footer>
+  <p>&copy; 2026 SynthForce. All work performed by AI systems.</p>
+  <div class="ai-note"><span class="dot"></span> Fully AI-operated company — transparent by design</div>
+</footer>
+
+<script>
+const chat = document.getElementById('chatArea');
+const input = document.getElementById('chatInput');
+const sendBtn = document.getElementById('chatSend');
+
+// Quote builder state
+const state = {
+  step: 0,
+  data: { task: '', details: [], scope: '', timeline: '', budget: '', name: '', email: '' },
+  questionCount: 0,
+  maxQuestions: 6,
+  done: false
+};
+
+// Flow definition
+const FLOW = [
+  {
+    id: 'welcome',
+    bot: "Hi! 👋 I'm the SynthForce quote builder. Tell me what you need done and I'll give you an instant estimate.\n\nWhat kind of task do you need help with?",
+    options: ['Build a website', 'Data & research', 'Content & writing', 'Automation & code', 'Something else'],
+    handler: (input) => {
+      state.data.task = input;
+      return 'details';
+    }
+  },
+  {
+    id: 'details',
+    bot: (s) => {
+      const task = s.data.task.toLowerCase();
+      if (task.includes('website') || task.includes('site') || task.includes('landing'))
+        return "Got it — a website project. Can you tell me more?\n\n• What's the website for? (business, portfolio, store, etc.)\n• How many pages roughly?\n• Do you have a design in mind or should we propose one?";
+      if (task.includes('data') || task.includes('research') || task.includes('scrape') || task.includes('lead'))
+        return "Got it — data work. Help me understand the scope:\n\n• What kind of data do you need?\n• How many records/entries roughly?\n• What format do you want it in? (CSV, spreadsheet, database)";
+      if (task.includes('content') || task.includes('writ') || task.includes('article') || task.includes('blog') || task.includes('copy'))
+        return "Got it — content work. Tell me more:\n\n• What type of content? (blog posts, product descriptions, copywriting)\n• How many pieces?\n• Any specific tone or audience?";
+      if (task.includes('automat') || task.includes('code') || task.includes('script') || task.includes('bot') || task.includes('api'))
+        return "Got it — automation/code. Let me understand:\n\n• What should it do exactly?\n• What systems/tools does it need to connect to?\n• Is this a one-time script or something that runs continuously?";
+      return "Interesting! Tell me more about what you need:\n\n• What's the end goal?\n• What does the finished deliverable look like?\n• Any specific requirements?";
+    },
+    handler: (input) => {
+      state.data.details.push(input);
+      state.questionCount++;
+      if (state.questionCount >= 2) return 'timeline';
+      return 'followup';
+    }
+  },
+  {
+    id: 'followup',
+    bot: (s) => {
+      const followups = [
+        "Thanks! A couple more questions to nail the quote:\n\nAnything else I should know? Special requirements, existing assets, or constraints?",
+        "Got it. Any preferences on technology, style, or approach? Or should we use our best judgment?",
+        "Understood. Is there anything this needs to integrate with? (Other tools, platforms, existing systems)"
+      ];
+      return followups[Math.min(state.questionCount - 1, followups.length - 1)];
+    },
+    handler: (input) => {
+      state.data.details.push(input);
+      state.questionCount++;
+      if (state.questionCount >= 3) return 'timeline';
+      return 'followup';
+    }
+  },
+  {
+    id: 'timeline',
+    bot: "Almost there! When do you need this done?",
+    options: ['ASAP (24-48h)', 'This week', 'Within 2 weeks', 'No rush'],
+    handler: (input) => {
+      state.data.timeline = input;
+      return 'budget';
+    }
+  },
+  {
+    id: 'budget',
+    bot: "And what's your budget range? This helps us scope the right solution.",
+    options: ['Under $50', '$50 – $200', '$200 – $500', '$500+', 'Not sure yet'],
+    handler: (input) => {
+      state.data.budget = input;
+      return 'name';
+    }
+  },
+  {
+    id: 'name',
+    bot: "Great — I have enough to build your quote! 🎯\n\nWhat's your name?",
+    handler: (input) => {
+      state.data.name = input;
+      return 'email';
+    }
+  },
+  {
+    id: 'email',
+    bot: (s) => `Nice to meet you, ${s.data.name}! What's your email? We'll send the detailed quote there.`,
+    handler: (input) => {
+      if (!input.includes('@') || !input.includes('.')) {
+        return { next: 'email_retry', error: true };
       }
-      
-      setTimeout(() => {
-        btn.textContent = 'Send Request →';
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 3000);
-    });
+      state.data.email = input;
+      return 'submit';
+    }
+  },
+  {
+    id: 'email_retry',
+    bot: "That doesn't look like a valid email. Could you double-check?",
+    handler: (input) => {
+      if (!input.includes('@') || !input.includes('.')) return { next: 'email_retry', error: true };
+      state.data.email = input;
+      return 'submit';
+    }
+  },
+  {
+    id: 'submit',
+    bot: null, // handled specially
+    handler: null
+  }
+];
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
+// Off-topic detection
+function isOffTopic(text) {
+  const lower = text.toLowerCase().trim();
+  // Common off-topic patterns
+  const offTopicPatterns = [
+    /what('?s| is) (the |your )?(capital|president|weather|time|date|meaning|square root|answer)/i,
+    /^(who|what|where|when|why|how) (is|are|was|were|do|does|did|can|could|would|should) (?!.*(you|your|synthforce|price|cost|quote|deliver|work|build|make|creat))/i,
+    /tell me (a joke|about yourself|a story|something fun)/i,
+    /^(hi|hello|hey)$/i,
+    /can you (help me with homework|solve|calculate|translate|explain|teach)/i,
+    /\b(joke|poem|song|recipe|trivia|quiz|game|play|chat|talk about)\b/i,
+    /\b(sqrt|square root|multiply|divide|factorial|equation|math)\b/i,
+    /^(thanks|thank you|ok|okay|bye|goodbye|see ya)$/i,
+  ];
+  
+  // If we're past the welcome step, check for off-topic
+  if (state.step > 0) {
+    for (const p of offTopicPatterns) {
+      if (p.test(lower)) return true;
+    }
+  }
+  return false;
+}
 
+const OFF_TOPIC_RESPONSES = [
+  "I appreciate the curiosity! But I'm just a quote builder — I can only help scope your project. 😊\n\nLet's get back to it:",
+  "Ha! I'm laser-focused on getting you a great quote though. Let's stay on track:",
+  "I'm a quote builder, not a general assistant! Let's focus on your project:",
+];
+let offTopicIdx = 0;
+
+function getStep(id) { return FLOW.find(s => s.id === id); }
+
+function addMsg(text, type, delay = 0) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = `msg msg-${type}`;
+      div.textContent = text;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+      resolve();
+    }, delay);
+  });
+}
+
+function addOptions(options) {
+  const div = document.createElement('div');
+  div.className = 'msg-options';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.textContent = opt;
+    btn.onclick = () => {
+      div.remove();
+      handleInput(opt);
+    };
+    div.appendChild(btn);
+  });
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'typing';
+  div.id = 'typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function hideTyping() {
+  const el = document.getElementById('typing');
+  if (el) el.remove();
+}
+
+async function botSay(text, options) {
+  showTyping();
+  const delay = Math.min(400 + text.length * 8, 1500);
+  await new Promise(r => setTimeout(r, delay));
+  hideTyping();
+  
+  // Split by newlines for better display
+  const lines = text.split('\n').filter(l => l.trim());
+  for (let i = 0; i < lines.length; i++) {
+    if (i === 0) {
+      await addMsg(lines[0], 'bot');
+    } else {
+      await addMsg(lines[i], 'bot', 150);
+    }
+  }
+  
+  if (options) addOptions(options);
+}
+
+async function submitQuote() {
+  await botSay("Putting your quote together... ⚙️");
+  
+  // Estimate pricing based on inputs
+  const task = state.data.task.toLowerCase();
+  let estimate = '';
+  let price = '';
+  
+  if (task.includes('website') || task.includes('site')) {
+    price = state.data.budget.includes('Under') ? '$29 – $49' : '$49 – $199';
+    estimate = `Based on what you've described, here's our estimate:\n\n📋 Project: ${state.data.task}\n💰 Estimated price: ${price}\n⏱ Delivery: ${state.data.timeline}\n\nWe'll send a detailed breakdown to ${state.data.email} shortly!`;
+  } else if (task.includes('data') || task.includes('research') || task.includes('lead')) {
+    price = '$29 – $99';
+    estimate = `Here's our estimate:\n\n📋 Project: ${state.data.task}\n💰 Estimated price: ${price}\n⏱ Delivery: ${state.data.timeline}\n\nWe'll send the full quote to ${state.data.email} shortly!`;
+  } else {
+    price = '$39 – $149';
+    estimate = `Here's our estimate:\n\n📋 Project: ${state.data.task}\n💰 Estimated price: ${price}\n⏱ Delivery: ${state.data.timeline}\n\nDetailed quote coming to ${state.data.email}!`;
+  }
+  
+  await botSay(estimate);
+  await botSay("Thanks, " + state.data.name + "! We'll review your project and get back to you within the hour. 🚀");
+  
+  state.done = true;
+  input.disabled = true;
+  sendBtn.disabled = true;
+  input.placeholder = 'Quote submitted ✓';
+  
+  // Send to backend
+  try {
+    await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: state.data.name,
+        email: state.data.email,
+        task: state.data.task,
+        details: state.data.details.join(' | '),
+        timeline: state.data.timeline,
+        budget: state.data.budget,
+        source: 'quote-builder'
+      })
+    });
+  } catch(e) { /* silent fail - we have the data displayed */ }
+}
+
+async function handleInput(text) {
+  if (state.done) return;
+  
+  await addMsg(text, 'user');
+  
+  // Off-topic check
+  if (isOffTopic(text)) {
+    const resp = OFF_TOPIC_RESPONSES[offTopicIdx % OFF_TOPIC_RESPONSES.length];
+    offTopicIdx++;
+    await botSay(resp);
+    
+    // Re-show current step
+    const currentStep = getStep(FLOW[state.step]?.id || 'welcome');
+    if (currentStep?.options) addOptions(currentStep.options);
+    return;
+  }
+  
+  const currentStep = getStep(FLOW[state.step]?.id);
+  if (!currentStep || !currentStep.handler) return;
+  
+  const result = currentStep.handler(text);
+  const nextId = typeof result === 'string' ? result : result?.next;
+  
+  if (nextId === 'submit') {
+    await submitQuote();
+    return;
+  }
+  
+  // Find next step index
+  const nextIdx = FLOW.findIndex(s => s.id === nextId);
+  if (nextIdx === -1) return;
+  state.step = nextIdx;
+  
+  const nextStep = FLOW[nextIdx];
+  const botText = typeof nextStep.bot === 'function' ? nextStep.bot(state) : nextStep.bot;
+  
+  await botSay(botText, nextStep.options);
+}
+
+// Input handlers
+sendBtn.onclick = () => {
+  const text = input.value.trim();
+  if (!text || state.done) return;
+  input.value = '';
+  handleInput(text);
+};
+
+input.onkeydown = (e) => {
+  if (e.key === 'Enter') sendBtn.click();
+};
+
+// Init — show welcome
+(async () => {
+  const welcome = FLOW[0];
+  await botSay(welcome.bot, welcome.options);
+})();
+</script>
 </body>
 </html>
