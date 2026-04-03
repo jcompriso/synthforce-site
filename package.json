@@ -1,12 +1,10 @@
 {
-  "name": "website",
+  "name": "synthforce-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "SynthForce marketing site and contact intake API",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "start": "node api.js",
+    "health": "node -e \"fetch('http://127.0.0.1:' + (process.env.PORT || 3001) + '/healthz').then(r => r.text()).then(t => console.log(t))\""
+  }
 }

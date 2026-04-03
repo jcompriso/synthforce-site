@@ -188,7 +188,7 @@
       <a href="#work" class="nav-link">Work</a>
       <a href="#how" class="nav-link">How</a>
       <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#quote-builder" class="nav-cta">Get a Quote</a>
+      <a href="#quote-builder" class="nav-cta">Start a Project</a>
     </div>
   </div>
 </nav>
@@ -215,7 +215,7 @@
       <div class="quote-container">
         <div class="quote-header">
           <div class="dot"></div>
-          <span>SynthForce Quote Builder</span>
+          <span>SynthForce Project Intake</span>
         </div>
         <div class="chat-area" id="chatArea"></div>
         <div class="chat-input" id="chatInputArea">
@@ -338,8 +338,8 @@
       <div class="how-step">
         <div class="step-num">4</div>
         <div>
-          <h3>Pay When Satisfied</h3>
-          <p>Only pay once you've approved the deliverable. We accept all major cards via Stripe. Simple and secure.</p>
+          <h3>Approve Before Payment</h3>
+          <p>We review your request first, confirm scope by email, and only sort payment after the work and terms are agreed.</p>
         </div>
       </div>
     </div>
@@ -371,8 +371,8 @@
     <div class="faq-a"><p>Yes. We don't sell or share your data. Project data is used only to complete your request. We use encrypted connections and don't run tracking scripts. See our <a href="/privacy.html" style="color:var(--accent)">Privacy Policy</a> for full details.</p></div>
   </div>
   <div class="faq-item">
-    <button class="faq-q">How do I pay?</button>
-    <div class="faq-a"><p>Via Stripe — all major credit and debit cards accepted. Payment is collected only after you approve the delivered work. No upfront payment required for most projects.</p></div>
+    <button class="faq-q">How does payment work?</button>
+    <div class="faq-a"><p>Right now the site is focused on project intake. We review your request first, confirm scope and delivery by email, and only arrange payment once the project is approved.</p></div>
   </div>
 </section>
 
@@ -423,7 +423,7 @@ const state = {
 const FLOW = [
   {
     id: 'welcome',
-    bot: "Hi! 👋 I'm the SynthForce quote builder. Tell me what you need done and I'll give you an instant estimate.\n\nWhat kind of task do you need help with?",
+    bot: "Hi! 👋 I'm the SynthForce project intake assistant. Tell me what you need done and I'll capture the brief for a fast follow-up.\n\nWhat kind of task do you need help with?",
     options: ['Build a website', 'Data & research', 'Content & writing', 'Automation & code', 'Something else'],
     handler: (input) => {
       state.data.task = input;
@@ -488,7 +488,7 @@ const FLOW = [
   },
   {
     id: 'name',
-    bot: "Great — I have enough to build your quote! 🎯\n\nWhat's your name?",
+    bot: "Great — I have enough to capture your project brief. 🎯\n\nWhat's your name?",
     handler: (input) => {
       state.data.name = input;
       return 'email';
@@ -496,7 +496,7 @@ const FLOW = [
   },
   {
     id: 'email',
-    bot: (s) => `Nice to meet you, ${s.data.name}! What's your email? We'll send the detailed quote there.`,
+    bot: (s) => `Nice to meet you, ${s.data.name}! What's your email? We'll reply there with next steps and a scoped quote if it's a fit.`,
     handler: (input) => {
       if (!input.includes('@') || !input.includes('.')) {
         return { next: 'email_retry', error: true };
@@ -527,7 +527,7 @@ function isOffTopic(text) {
   // Common off-topic patterns
   const offTopicPatterns = [
     /what('?s| is) (the |your )?(capital|president|weather|time|date|meaning|square root|answer)/i,
-    /^(who|what|where|when|why|how) (is|are|was|were|do|does|did|can|could|would|should) (?!.*(you|your|synthforce|price|cost|quote|deliver|work|build|make|creat))/i,
+    /^(who|what|where|when|why|how) (is|are|was|were|do|does|did|can|could|would|should) (?!.*(you|your|synthforce|price|cost|quote|project|deliver|work|build|make|creat))/i,
     /tell me (a joke|about yourself|a story|something fun)/i,
     /^(hi|hello|hey)$/i,
     /can you (help me with homework|solve|calculate|translate|explain|teach)/i,
@@ -546,9 +546,9 @@ function isOffTopic(text) {
 }
 
 const OFF_TOPIC_RESPONSES = [
-  "I appreciate the curiosity! But I'm just a quote builder — I can only help scope your project. 😊\n\nLet's get back to it:",
-  "Ha! I'm laser-focused on getting you a great quote though. Let's stay on track:",
-  "I'm a quote builder, not a general assistant! Let's focus on your project:",
+  "I appreciate the curiosity! But I'm just the project intake assistant — I can only help capture your project brief. 😊\n\nLet's get back to it:",
+  "Ha! I'm laser-focused on getting your brief captured properly. Let's stay on track:",
+  "I'm a project intake assistant, not a general assistant. Let's focus on your project:",
 ];
 let offTopicIdx = 0;
 
@@ -617,32 +617,23 @@ async function botSay(text, options) {
 }
 
 async function submitQuote() {
-  await botSay("Putting your quote together... ⚙️");
-  
-  // Estimate pricing based on inputs
-  const task = state.data.task.toLowerCase();
-  let estimate = '';
-  let price = '';
-  
-  if (task.includes('website') || task.includes('site')) {
-    price = state.data.budget.includes('Under') ? '$29 – $49' : '$49 – $199';
-    estimate = `Based on what you've described, here's our estimate:\n\n📋 Project: ${state.data.task}\n💰 Estimated price: ${price}\n⏱ Delivery: ${state.data.timeline}\n\nWe'll send a detailed breakdown to ${state.data.email} shortly!`;
-  } else if (task.includes('data') || task.includes('research') || task.includes('lead')) {
-    price = '$29 – $99';
-    estimate = `Here's our estimate:\n\n📋 Project: ${state.data.task}\n💰 Estimated price: ${price}\n⏱ Delivery: ${state.data.timeline}\n\nWe'll send the full quote to ${state.data.email} shortly!`;
-  } else {
-    price = '$39 – $149';
-    estimate = `Here's our estimate:\n\n📋 Project: ${state.data.task}\n💰 Estimated price: ${price}\n⏱ Delivery: ${state.data.timeline}\n\nDetailed quote coming to ${state.data.email}!`;
-  }
-  
-  await botSay(estimate);
-  await botSay("Thanks, " + state.data.name + "! We'll review your project and get back to you within the hour. 🚀");
-  
+  await botSay("Saving your project brief... ⚙️");
+
+  const summary = `Here's what we've captured:
+
+📋 Project type: ${state.data.task}
+⏱ Preferred timeline: ${state.data.timeline}
+💰 Budget range: ${state.data.budget}
+📧 Reply email: ${state.data.email}`;
+
+  await botSay(summary);
+  await botSay("Thanks, " + state.data.name + "! Your request is in. We'll review it and reply by email as soon as possible with next steps. 🚀");
+
   state.done = true;
   input.disabled = true;
   sendBtn.disabled = true;
-  input.placeholder = 'Quote submitted ✓';
-  
+  input.placeholder = 'Project brief submitted ✓';
+
   // Send to backend
   try {
     await fetch('/api/contact', {
